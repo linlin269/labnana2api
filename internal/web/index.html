@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Labnana 2 API</title>
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-mono/style.css" rel="stylesheet" />
+    <link href="/assets/base.css" rel="stylesheet" />
+    <link href="/assets/console.css" rel="stylesheet" />
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark">L2</span>
+          <span class="brand-copy">
+            <strong>Labnana 2 API</strong>
+            <small>OpenAI-compatible image gateway</small>
+          </span>
+        </a>
+        <div class="topbar-actions">
+          <span class="badge mono" id="modelBadge">gpt-image-2 · 2K</span>
+          <a class="button button-secondary" href="#gallerySection">画廊</a>
+          <button class="button button-primary" id="refreshAll" type="button">刷新</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell page fade-in">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">管理控制台</span>
+          <h1>Labnana GPT-Image-2 2K Bridge</h1>
+          <p>
+            暴露 OpenAI 风格的图片接口和管理接口，后端固定转发到 Labnana 的
+            <span class="mono">gpt-image-2</span> 2K 生图能力，并统一纳入对象存储和本地画廊。
+          </p>
+          <div class="endpoint-list">
+            <span class="badge mono">/v1/models</span>
+            <span class="badge mono">/v1/images/generations</span>
+            <span class="badge mono">/v1/images/edits</span>
+            <span class="badge mono">/v1/chat/completions</span>
+          </div>
+          <div class="status" id="pageStatus"></div>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <span class="metric-label">服务状态</span>
+            <strong class="metric-value" id="statusText">loading</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">启用 Keys</span>
+            <strong class="metric-value" id="keyCount">0</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">画廊图片数</span>
+            <strong class="metric-value" id="galleryCount">0</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">对象存储</span>
+            <strong class="metric-value" id="storageText">unknown</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <div>
+            <h2>控制台认证</h2>
+            <p>输入当前服务的 API Key，管理页请求会自动携带 Bearer 头。</p>
+          </div>
+        </div>
+        <div class="status" id="authStatus"></div>
+        <div class="inline-form">
+          <label class="field grow" for="adminApiKey">
+            <span>API Key</span>
+            <input id="adminApiKey" class="input" placeholder="labnana2api" />
+          </label>
+          <button class="button button-primary" id="saveApiKey" type="button">保存到浏览器</button>
+        </div>
+      </section>
+
+      <section class="two-column">
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h2>配置摘要</h2>
+              <p>只读展示当前代理、对象存储和上游设置。</p>
+            </div>
+          </div>
+          <div class="status" id="configStatus"></div>
+          <pre id="configDump">loading...</pre>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h2>新增 Key</h2>
+              <p>支持多个 Labnana Key，服务会按轮询顺序自动切换。</p>
+            </div>
+          </div>
+          <div class="status" id="keyFormStatus"></div>
+          <div class="stack-form">
+            <label class="field" for="keyName">
+              <span>名称</span>
+              <input id="keyName" class="input" placeholder="labnana-prod-1" />
+            </label>
+            <label class="field" for="keyValue">
+              <span>Labnana Key</span>
+              <input id="keyValue" class="input" placeholder="ls_xxxxxxxx" />
+            </label>
+            <button class="button button-primary full-width" id="addKey" type="button">添加 Key</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <div>
+            <h2>Key 管理</h2>
+            <p>查看启用状态、成功失败次数和最近错误。</p>
+          </div>
+        </div>
+        <div class="status" id="keyListStatus"></div>
+        <div class="key-list" id="keyList">
+          <div class="empty-state">还没有可展示的 Key。</div>
+        </div>
+      </section>
+
+      <section class="card" id="gallerySection">
+        <div class="section-head">
+          <div>
+            <h2>画廊</h2>
+            <p>展示最近生成结果、提示词、尺寸比例和实际返回地址。</p>
+          </div>
+        </div>
+        <div class="status" id="galleryStatus"></div>
+        <div class="gallery-grid" id="galleryList">
+          <div class="empty-state">还没有图片生成记录。</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

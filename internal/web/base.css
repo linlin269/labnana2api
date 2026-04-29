@@ -1,0 +1,262 @@
+:root {
+  --bg: #fafafa;
+  --surface: #fff;
+  --fg: #000;
+  --muted: #666;
+  --subtle: #888;
+  --border: #eaeaea;
+  --accent: #111;
+  --success-bg: #ecfdf3;
+  --success-fg: #047857;
+  --danger-bg: #fef2f2;
+  --danger-fg: #b91c1c;
+  --radius: 14px;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(0, 0, 0, 0.02), transparent 24%),
+    linear-gradient(180deg, #fbfbfb 0%, var(--bg) 100%);
+  color: var(--fg);
+  font-family: "Geist Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.shell {
+  width: min(1120px, calc(100vw - 32px));
+  margin: 0 auto;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(250, 250, 250, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(234, 234, 234, 0.9);
+}
+
+.topbar-inner,
+.topbar-actions,
+.brand,
+.brand-copy,
+.section-head,
+.inline-form,
+.endpoint-list,
+.key-meta,
+.key-summary,
+.key-actions,
+.gallery-meta {
+  display: flex;
+}
+
+.topbar-inner {
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.brand-copy {
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-copy strong {
+  font-size: 14px;
+}
+
+.brand-copy small,
+.section-head p,
+.field span,
+.empty-state,
+.muted {
+  color: var(--muted);
+}
+
+.topbar-actions,
+.inline-form,
+.endpoint-list,
+.key-actions {
+  flex-wrap: wrap;
+}
+
+.topbar-actions {
+  align-items: center;
+  gap: 10px;
+}
+
+.page {
+  padding: 28px 0 40px;
+  display: grid;
+  gap: 20px;
+}
+
+.hero,
+.two-column {
+  display: grid;
+  gap: 20px;
+}
+
+.hero {
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  align-items: start;
+}
+
+.hero-copy h1 {
+  margin: 10px 0 12px;
+  font-size: clamp(34px, 4.5vw, 54px);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.hero-copy p {
+  margin: 0;
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.eyebrow,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.eyebrow {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.endpoint-list {
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.badge {
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #444;
+}
+
+.mono,
+pre,
+.gallery-link {
+  font-family: "Geist Mono", monospace;
+}
+
+.metrics-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card,
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card {
+  padding: 22px;
+}
+
+.metric-card {
+  padding: 18px;
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metric-value {
+  display: block;
+  margin-top: 10px;
+  font-size: 22px;
+  letter-spacing: -0.04em;
+}
+
+.section-head {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -0.04em;
+}
+
+.section-head p {
+  margin: 6px 0 0;
+  font-size: 14px;
+}
+
+.status {
+  display: none;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--success-bg);
+  color: var(--success-fg);
+  font-size: 13px;
+}
+
+.status.show {
+  display: block;
+}
+
+.status.error {
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+}

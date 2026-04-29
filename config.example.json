@@ -1,0 +1,39 @@
+{
+  "api_key": "labnana2api",
+  "public_base_url": "",
+  "proxy": "http://127.0.0.1:19090",
+  "no_proxy": [
+    "127.0.0.1",
+    "localhost",
+    "::1"
+  ],
+  "port": 18082,
+  "log_file": "logs/labnana2api.log",
+  "log_level": "info",
+  "object_storage": {
+    "enabled": false,
+    "provider": "minio",
+    "endpoint": "",
+    "access_key_id": "",
+    "secret_access_key": "",
+    "bucket": "",
+    "region": "cn-east-1",
+    "use_ssl": false,
+    "public_base_url": "",
+    "key_prefix": "image/ai/labnana-images",
+    "auto_create_bucket": false
+  },
+  "labnana": {
+    "base_url": "https://api.labnana.com",
+    "timeout": 300,
+    "default_provider": "openai",
+    "default_model": "gpt-image-2",
+    "default_image_size": "2K",
+    "default_aspect_ratio": "1:1"
+  },
+  "labnana_keys": [],
+  "note": [
+    "Fill labnana_keys with your real keys.",
+    "Enable object_storage after adding your real bucket credentials."
+  ]
+}

@@ -1,0 +1,8 @@
+bin/
+run/
+logs/
+.runtime/
+config.json
+
+*.out
+*.test
